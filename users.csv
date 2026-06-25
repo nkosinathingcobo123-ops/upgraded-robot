@@ -1,6 +1,6 @@
-Username,Password
-NgcoboAdmin,ngiytu
-NgcoboUser,nkn5t758
-NgcoboGuest,guest123
-NgcoboManager
-                                   
+Username,Password,Role
+NgcoboAdmin,ngiytu,Admin
+NgcoboUser,nkn5t758,User
+NgcoboGuest,guest123,Guest
+NgcoboManager,         ,Manager
+                                                                    
