@@ -4,7 +4,10 @@ import time
 import csv
 import string
 
+
 input_tries = 5
+
+users_file = ''
 
 
 def check_username_exists(username):
@@ -85,12 +88,14 @@ print(check_password(password))
 
 # correct function
 
+# must be fixed
+
 
 def password_available(password):
     with open('users.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            if row['Password'].strip() == password:
+            if row['Password'.strip()] == password:
                 True
                 return f'Password "{password}" is correct.'
         False
@@ -117,6 +122,8 @@ def check_password_exists(username):
         else:
             return f"Username '{username}' does not exit."
 
+
+print(check_password_exists(username))
 # correct function
 
 

@@ -5,15 +5,12 @@ import string
 from pathlib import Path
 
 
-users_files = Path(__file__).with_name("userswithrole.csv")
-fieldname = ["Username", "Password", "Role"]
+USERS_FILE = Path(__file__).with_name("userswithroles.csv")
+FIELDNAMES = ["Username", "Password", "Role"]
 
 
 def normalize_user(row):
-    # starts dictionary literal
     return {
-        # reads the users username,password from each row
-        # None or "" makes it empty if the info missing
         "Username": (row.get("Username") or "").strip(),
         "Password": row.get("Password") or "",
         "Role": (row.get("Role") or "User").strip() or "User",
@@ -21,24 +18,21 @@ def normalize_user(row):
 
 
 def read_users():
-    # checks if the csv file exists
-    if not users_files.exists():
-        # if file does not exist returns empty list
+    if not USERS_FILE.exists():
         return []
 
-    with users_files.open("r", newline="", encoding="utf-8") as file:
+    with USERS_FILE.open("r", newline="", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         return [
-            normalize_user(row)  # converts each csv row to dictionary
+            normalize_user(row)
             for row in reader
-            # skips rows with no username or has whitespace
             if (row.get("Username") or "").strip()
         ]
 
 
 def write_users(users):
-    with users_files.open("w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=fieldname)
+    with USERS_FILE.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
         writer.writeheader()
         writer.writerows(users)
 
@@ -53,9 +47,6 @@ def find_user(username):
 
 def check_username_exists(username):
     return find_user(username) is not None
-
-
-check_username_exists('NgcoboAdmin')
 
 
 def authenticate_user(username, password):
@@ -94,7 +85,7 @@ def validate_password(password):
 
 def login_user():
     username = input("Enter your username: ").strip()
-    password = input("Enter your password: ").strip()
+    password = input("Enter your password: ")
     user = authenticate_user(username, password)
 
     if user:
@@ -136,8 +127,6 @@ def register_user():
     write_users(users)
     print(f"User '{username}' registered as {role}.")
     return True
-
-# correct code
 
 
 def options():

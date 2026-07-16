@@ -20,3 +20,13 @@ def cr(usernm):
 cr2 = cr('NgcoboManager')
 if cr2:
     print(cr2['Role'])
+
+
+def abd(n):
+    while n >= 10:
+        n = sum(int(digit) for digit in str(n))
+    return n
+
+
+abd2 = abd(123456789)
+print(abd2)
