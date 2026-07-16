@@ -53,12 +53,37 @@ def cr(usernm):
     with open('users.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            if row['Username'.strip()] == usernm:
+            if row['Username'.strip(" ")] == usernm:
                 return True
         return False
 
 
-print(cr(username))
+def new_func(username, cr):
+    print(cr(username))
+
+
+def cp(username):
+    with open('users.csv', 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        if cr(username) == True:
+            for row in reader:
+                if row['Username'.strip(" ")] == username:
+                    return True
+            return False
+
+
+def check_password(password):
+    with open('users.csv', 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row['Password'.strip(" ")] == password:
+                return True
+        return False
+
+
+print(check_password(password))
+
+# correct function
 
 
 def password_available(password):
@@ -72,6 +97,11 @@ def password_available(password):
         return f"Password '{password}' is incorrect."
 
 
+print(password_available(password))
+
+# correct function
+
+
 def check_password_exists(username):
     with open('users.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
@@ -79,19 +109,29 @@ def check_password_exists(username):
             print(f'Username "{username}" exists.')
             password = input("Enter your password: ")
             for row in reader:
-                if row['Password'].strip() == password:
+                if row['Password'.strip()] == password:
                     True
-                    return f'Password "{password}" is correct.'
+                    return f'Password "{password}" is corre.'
             False
             return f"Password '{password}' is incorrect."
         else:
-            return f"Username '{username}' does not exist."
+            return f"Username '{username}' does not exit."
+
+# correct function
 
 
 def generate_password(length=random.randint(8, 20)):
     chars = string.ascii_letters + string.digits + string.punctuation
     return ''.join(random.choice(chars) for j in range(length))
 
+# correct function
+
+
+def new_password_exist(username, check_password_exists):
+    print(check_password_exists(username))
+
+
+new_password_exist(username, check_password_exists)
 
 generated_password = generate_password()
 print(f'Generated password: {generated_password}')
